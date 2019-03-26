@@ -45,7 +45,7 @@ void launch_cd(char **argv, main_var_t *vars)
         return;
     }
     if (nb == -1) {
-        perror("");
+        perror(argv);
         free(pwd);
         return;
     }
