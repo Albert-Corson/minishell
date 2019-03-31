@@ -14,7 +14,7 @@ void show_prompt(main_var_t *vars)
         my_putstr(vars->group);
     my_putstr(" ");
     if (vars && vars->pwd)
-    my_putstr(vars->pwd);
+        my_putstr(vars->pwd);
     my_putstr("]$ ");
 }
 

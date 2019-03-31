@@ -55,5 +55,5 @@ int check_child_status(char *path, int child_status)
         my_put_err_nbr(child_status);
         my_puterror("\n");
     }
-    return (WTERMSIG(child_status));
+    return (child_status);
 }
