@@ -27,12 +27,18 @@
 #define FAIL_IF(cond, ret) if (cond) return (ret)
 #define FAIL_IF_VOID(cond) if (cond) return
 
+typedef struct cmd_list_s {
+    char *cmd;
+    struct cmd_list_s *next;
+} cmd_list_t;
+
 typedef struct main_var {
     char **envp;
     char *pwd;
     char *group;
     int exit_status;
     int do_exit;
+    cmd_list_t *cmd_list;
 } main_var_t;
 
 // LIB:
@@ -68,11 +74,12 @@ void show_prompt(main_var_t *vars);
 int check_exit(char **argv);
 void launch_cd(char **argv, main_var_t *vars);
 void get_cmd(char **argv, main_var_t *vars);
-char **get_input(main_var_t *vars);
+char *get_input(main_var_t *vars);
 int exit_sh(char **argv, main_var_t *vars);
 int get_table_size(char **table);
 int readjust_nb(int nb, int min, int max);
 void launch_cmd(char **argv, main_var_t *vars);
 int check_child_status(char *path, int child_status);
+void fill_cmd_list(main_var_t *vars);
 
 #endif /* !MYSH_H_ */

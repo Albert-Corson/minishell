@@ -18,9 +18,8 @@ void show_prompt(main_var_t *vars)
     my_putstr("]$ ");
 }
 
-char **get_input(main_var_t *vars)
+char *get_input(main_var_t *vars)
 {
-    char **argv = NULL;
     char *input = NULL;
     size_t len = 0;
     int check = 0;
@@ -32,9 +31,7 @@ char **get_input(main_var_t *vars)
         vars->do_exit = 1;
         return (NULL);
     }
-    argv = get_argv(input);
-    free(input);
-    return (argv);
+    return (input);
 }
 
 char *get_path(void)
@@ -48,4 +45,41 @@ char *get_path(void)
     tmp = my_copycat(tmp, rtn + i, -1);
     free(rtn);
     return (tmp);
+}
+
+void add_cmd_to_list(main_var_t *vars, char *str)
+{
+    cmd_list_t *new = NULL;
+    cmd_list_t *tmp = vars->cmd_list;
+
+    FAIL_IF_VOID(!str);
+    new = malloc(sizeof(*new));
+    new->next = NULL;
+    new->cmd = str;
+    if (!tmp) {
+        vars->cmd_list = new;
+        return;
+    }
+    while (tmp->next)
+        tmp = tmp->next;
+    tmp->next = new;
+}
+
+void fill_cmd_list(main_var_t *vars)
+{
+    char *str = NULL;
+    int i = 0;
+    int n = 0;
+
+    FAIL_IF_VOID(vars->cmd_list);
+    str = get_input(vars);
+    while (str && str[i]) {
+        if (str[i] == ';') {
+            add_cmd_to_list(vars, my_copycat(NULL, str + n, i));
+            n = i + 1;
+        }
+        ++i;
+    }
+    if (str)
+        add_cmd_to_list(vars, my_copycat(NULL, str + n, i));
 }

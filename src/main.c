@@ -17,6 +17,7 @@ main_var_t *init_main_var(char **envp, char *tmp)
     vars->do_exit = 0;
     vars->pwd = get_path();
     vars->group = my_strdup(tmp ? tmp + 6 : "");
+    vars->cmd_list = NULL;
     return (vars);
 }
 
