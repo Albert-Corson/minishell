@@ -87,8 +87,7 @@ void launch_cmd(char **argv, main_var_t *vars)
     int child_pid = 0;
     char *path = get_cmd_path(argv, vars);
 
-    if (!path)
-        return;
+    FAIL_IF_VOID(!path);
     child_pid = fork();
     if (child_pid == -1) {
         perror("");

@@ -23,6 +23,10 @@
 #include <string.h>
 #include <errno.h>
 
+
+#define FAIL_IF(cond, ret) if (cond) return (ret)
+#define FAIL_IF_VOID(cond) if (cond) return
+
 typedef struct main_var {
     char **envp;
     char *pwd;

@@ -35,9 +35,8 @@ void launch_cd(char **argv, main_var_t *vars)
     if (nb == 1 || (nb == 2 && my_memcmp(argv[1], "~", -1) == 0)) {
         nb = chdir(get_env_var(vars->envp, "HOME=") + 5);
     } else if (nb == 2) {
-        if (my_memcmp(argv[1], "-", -1) != 0)
-            nb = chdir(argv[1]);
-        else
+        nb = (my_memcmp(argv[1], "-", -1) != 0) ? chdir(argv[1]) : nb;
+        if (my_memcmp(argv[1], "-", -1) == 0)
             nb = chdir(get_env_var(vars->envp, "OLDPWD") + 7);
     } else {
         my_puterror("cd: Too many arguments.\n");
@@ -46,6 +45,7 @@ void launch_cd(char **argv, main_var_t *vars)
     }
     if (nb == -1) {
         perror(argv[1]);
+        my_puterror(".");
         free(pwd);
         return;
     }
