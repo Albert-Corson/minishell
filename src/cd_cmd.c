@@ -27,6 +27,18 @@ void update_pwd(main_var_t *vars, char *pwd)
     vars->pwd = get_path();
 }
 
+void if_cd_failed(char **argv, int nb, char *pwd)
+{
+    if (nb == -1) {
+        my_puterror(argv[1]);
+        my_puterror(": ");
+        my_puterror(strerror(errno));
+        my_puterror(".\n");
+        free(pwd);
+        return;
+    }
+}
+
 void launch_cd(char **argv, main_var_t *vars)
 {
     int nb = get_table_size(argv);
@@ -43,11 +55,6 @@ void launch_cd(char **argv, main_var_t *vars)
         free(pwd);
         return;
     }
-    if (nb == -1) {
-        perror(argv[1]);
-        my_puterror(".");
-        free(pwd);
-        return;
-    }
+    if_cd_failed(argv, nb, pwd);
     update_pwd(vars, pwd);
 }

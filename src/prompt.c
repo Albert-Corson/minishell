@@ -68,18 +68,16 @@ void add_cmd_to_list(main_var_t *vars, char *str)
 void fill_cmd_list(main_var_t *vars)
 {
     char *str = NULL;
-    int i = 0;
-    int n = 0;
+    int stop = 0;
+    int start = 0;
 
     FAIL_IF_VOID(vars->cmd_list);
     str = get_input(vars);
-    while (str && str[i]) {
-        if (str[i] == ';') {
-            add_cmd_to_list(vars, my_copycat(NULL, str + n, i));
-            n = i + 1;
-        }
-        ++i;
+    while (stop != -1 && str && str[start]) {
+        stop = get_char_pos(str + start, ';');
+        add_cmd_to_list(vars, my_copycat(NULL, str + start, stop));
+        start = stop;
+        while (start != -1 && (str[start] == ';' || str[start] == ' '))
+            ++start;
     }
-    if (str)
-        add_cmd_to_list(vars, my_copycat(NULL, str + n, i));
 }
