@@ -47,12 +47,10 @@ int is_file(char *path)
     return (1);
 }
 
-int check_child_status(char *path, int child_status)
+int check_child_status(int child_status)
 {
     if (!WIFEXITED(child_status)) {
-        my_puterror(path);
-        my_puterror(": exited with RC: ");
-        my_put_err_nbr(child_status);
+        my_puterror(strsignal(WTERMSIG(child_status)));
         my_puterror("\n");
     }
     return (WTERMSIG(child_status));

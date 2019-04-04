@@ -64,14 +64,7 @@ void new_env(char **argv, main_var_t *vars, int nb_arg)
             return;
         }
     }
-    if (nb_arg > 3)
-        my_puterror("setenv: Too many arguments.\n");
-    else {
-        ++env_size;
-        if (get_env_var(vars->envp, argv[1]) == NULL)
-            ++env_size;
-        vars->envp = add_envp(vars->envp, argv, env_size);
-    }
+    add_var_to_env(nb_arg, env_size, argv, vars);
 }
 
 void rm_env(char **argv, main_var_t *vars, int nb_arg)

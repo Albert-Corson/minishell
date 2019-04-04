@@ -10,6 +10,7 @@ SRC	=	./src/main.c			\
 		./src/get_cmd.c			\
 		./src/get_argv.c		\
 		./src/env_cmd.c			\
+		./src/env_check_var.c	\
 		./src/cd_cmd.c			\
 		./src/exit_cmd.c		\
 		./src/find_cmd.c		\

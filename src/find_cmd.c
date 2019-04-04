@@ -68,7 +68,7 @@ char *get_cmd_path(char **argv, main_var_t *vars)
     path = find_cmd_path(get_env_var(vars->envp, "PATH=") + 5, argv[0]);
     if (!path)
         path = get_char_pos(argv[0], '/') == -1 ? NULL : my_strdup(argv[0]);
-    if (!path || access(path, F_OK) || access(path, X_OK)) {
+    if (!path || access(path, F_OK) != 0 || access(path, X_OK) != 0) {
         my_puterror(argv[0]);
         my_puterror(": Command not found.\n");
         return (NULL);
@@ -98,6 +98,6 @@ void launch_cmd(char **argv, main_var_t *vars)
         waitpid(child_pid, &child_status, 0);
         kill(child_pid, 0);
     }
-    vars->exit_status = check_child_status(path, child_status);
+    vars->exit_status = check_child_status(child_status);
     free(path);
 }

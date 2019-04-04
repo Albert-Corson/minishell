@@ -79,7 +79,9 @@ int exit_sh(char **argv, main_var_t *vars);
 int get_table_size(char **table);
 int readjust_nb(int nb, int min, int max);
 void launch_cmd(char **argv, main_var_t *vars);
-int check_child_status(char *path, int child_status);
+int check_child_status(int child_status);
 void fill_cmd_list(main_var_t *vars);
+void add_var_to_env(int nb_arg, int env_size, char **argv, main_var_t *vars);
+char **add_envp(char **envp, char **argv, int to_malloc);
 
 #endif /* !MYSH_H_ */
