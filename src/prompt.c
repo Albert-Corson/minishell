@@ -76,8 +76,8 @@ void fill_cmd_list(main_var_t *vars)
     while (stop != -1 && str && str[start]) {
         stop = get_char_pos(str + start, 59);
         add_cmd_to_list(vars, my_copycat(NULL, str + start, stop));
-        start = stop;
-        while (start != -1 && (str[start] == ';' || str[start] == ' '))
+        start += stop;
+        while (start != -1 && (str[start] == 59 || str[start] == ' '))
             ++start;
     }
 }

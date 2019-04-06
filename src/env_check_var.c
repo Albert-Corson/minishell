@@ -38,7 +38,7 @@ void add_var_to_env(int nb_arg, int env_size, char **argv, main_var_t *vars)
         ++env_size;
         if (!check_env_var(argv[1])) {
             my_puterror("setenv: Variable name must");
-            my_puterror(" contain alphanumeric characters.");
+            my_puterror(" contain alphanumeric characters.\n");
             return;
         } else if (get_env_var(vars->envp, argv[1]) == NULL)
             ++env_size;
