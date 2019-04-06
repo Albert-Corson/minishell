@@ -38,5 +38,5 @@ int main(int argc, char **argv, char **envp)
     rtn = my_shell(vars);
     my_putchar('\n');
     free_var(vars);
-    return (0);
+    return (rtn);
 }
