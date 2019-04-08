@@ -23,9 +23,8 @@
 #include <string.h>
 #include <errno.h>
 
-
 #define FAIL_IF(cond, ret) if (cond) return (ret)
-#define FAIL_IF_VOID(cond) if (cond) return
+#define FAIL_IF_VOID(cond) if (cond) return;
 
 typedef struct cmd_list_s {
     char *cmd;

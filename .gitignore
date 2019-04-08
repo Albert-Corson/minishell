@@ -4,5 +4,6 @@ segf
 inf
 mysh
 div
+ret
 *.o
 .gitignore
