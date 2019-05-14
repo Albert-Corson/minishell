@@ -1,6 +1,6 @@
 # Minishell
 
-A small [command-line interpreter](https://en.wikipedia.org/wiki/Unix_shell) coded in C
+A small [Unix command-line interpreter](https://en.wikipedia.org/wiki/Unix_shell) coded in C
 
 *This is a school project*
 
